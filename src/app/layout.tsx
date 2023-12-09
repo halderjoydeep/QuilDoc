@@ -1,5 +1,6 @@
 import { Navbar } from "@/components";
 import Providers from "@/components/Providers";
+import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
@@ -28,8 +29,11 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Navbar />
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          <Toaster />
+          {children}
+        </Providers>
       </body>
     </html>
   );

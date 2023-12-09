@@ -1,15 +1,22 @@
 "use client";
 
+import { trpc } from "@/app/_trpc/client";
+import { useUploadThing } from "@/lib/uploadthing";
 import { Cloud, File, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DropZone from "react-dropzone";
 import { buttonVariants } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import { Progress } from "./ui/progress";
+import { useToast } from "./ui/use-toast";
 
 const UploadDropZone = ({ isSubscribed }: { isSubscribed: boolean }) => {
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
+
+  const { toast } = useToast();
+  const router = useRouter();
 
   const startSimulatedProgress = () => {
     setUploadProgress(0);
@@ -27,6 +34,16 @@ const UploadDropZone = ({ isSubscribed }: { isSubscribed: boolean }) => {
     return interval;
   };
 
+  const { startUpload } = useUploadThing("pdfUploader");
+
+  const { mutate: startPolling } = trpc.getFile.useMutation({
+    onSuccess: (file) => {
+      router.push(`/dashboard/${file.id}`);
+    },
+    retry: true,
+    retryDelay: 500,
+  });
+
   return (
     <DropZone
       multiple={false}
@@ -37,10 +54,32 @@ const UploadDropZone = ({ isSubscribed }: { isSubscribed: boolean }) => {
 
         // Handle File Uploading
 
-        await new Promise((resolve) => setTimeout(resolve, 3000));
+        const res = await startUpload(acceptedFiles);
+
+        if (!res) {
+          return toast({
+            title: "Something went wrong",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
+
+        const [fileResponse] = res;
+
+        const key = fileResponse?.key;
+
+        if (!key) {
+          return toast({
+            title: "Something went wrong",
+            description: "Please try again later",
+            variant: "destructive",
+          });
+        }
 
         clearInterval(progressInterval);
         setUploadProgress(100);
+
+        startPolling({ key });
       }}
     >
       {({ getRootProps, getInputProps, acceptedFiles }) => (
