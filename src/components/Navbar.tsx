@@ -8,7 +8,7 @@ const Navbar = () => {
     <nav className="sticky left-0 top-0 z-10 flex h-14 items-center border-b border-gray-200 bg-white/75 backdrop-blur-lg">
       <div className="custom-container flex h-14 items-center justify-between">
         <Link href="/" className="font-semibold">
-          <span>Quildoc.</span>
+          <span>Quildocs.</span>
         </Link>
         <ul className="hidden items-center gap-4 sm:flex">
           <li>

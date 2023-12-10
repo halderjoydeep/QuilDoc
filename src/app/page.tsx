@@ -8,7 +8,7 @@ export default function Home() {
     <main>
       <header className="custom-contaier mb-12 mt-28 flex flex-col items-center justify-center text-center sm:mt-40">
         <p className="mb-4 rounded-full border border-gray-200 bg-white px-7 py-2 text-sm font-semibold text-gray-700 shadow-md backdrop-blur transition-all hover:border-gray-300 hover:bg-white/50">
-          Quildoc is now public!
+          Quildocs is now public!
         </p>
 
         <h1 className="mb-5 max-w-4xl text-5xl font-bold md:text-6xl lg:text-7xl">
@@ -17,8 +17,8 @@ export default function Home() {
         </h1>
 
         <p className="mx-auto max-w-prose px-4 text-zinc-700 sm:px-0 sm:text-lg">
-          Quildoc allows you to have conversations with any PDF document. Simply
-          upload your file and start asking right away.
+          Quildocs allows you to have conversations with any PDF document.
+          Simply upload your file and start asking right away.
         </p>
 
         <Link
@@ -52,7 +52,7 @@ export default function Home() {
               width={1364}
               height={866}
               quality={100}
-              alt="Quildoc preview"
+              alt="Quildocs preview"
               priority
               className="rounded-md bg-white p-2 shadow-2xl ring-1 ring-gray-900/10 sm:p-8 md:p-20"
             />
@@ -81,7 +81,7 @@ export default function Home() {
             Start chatting in minutes
           </h2>
           <p className="text-lg text-gray-600">
-            Chatting to your PDF files has never been easier than with Quildoc.
+            Chatting to your PDF files has never been easier than with Quildocs.
           </p>
         </div>
 
@@ -116,7 +116,7 @@ export default function Home() {
             <h3 className="text-xl font-semibold">Start asking questions</h3>
             <p className="text-zinc-700">
               <span className="mt-2 text-zinc-700">
-                It&apos;s that simple. Try out Quildoc today - it really takes
+                It&apos;s that simple. Try out Quildocs today - it really takes
                 less than a minute.
               </span>
             </p>
